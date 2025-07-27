@@ -5,5 +5,5 @@ def generate_email(username, message):
     
     return render_template(template, {
         "username": username,
-        "message": message  # User controlled
+        "message": message  
     })

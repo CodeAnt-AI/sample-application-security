@@ -3,7 +3,7 @@ class GraphQLResolver:
         self.rate_limit = {}
         
     def resolve_query(self, query, user):
-        # Basic rate limiting by query count
+
         user_id = user.id
         self.rate_limit[user_id] = self.rate_limit.get(user_id, 0) + 1
 
@@ -17,7 +17,7 @@ class GraphQLResolver:
         result = {}
         for field in query.fields:
             if field == "friends":
-                # VULNERABILITY: Recursively fetches without limit
+
                 result[field] = self.fetch_friends(query.nested_fields)
         return result
     
@@ -25,7 +25,7 @@ class GraphQLResolver:
         friends = get_user_friends()  # DB call
         
         if nested_fields and "friends" in nested_fields:
-            # Exponential explosion - each friend fetches their friends
+
             for friend in friends:
                 friend["friends"] = self.fetch_friends(nested_fields.nested_fields)
         

@@ -8,5 +8,5 @@ def salary_report(department, job_title, years_exp):
         "experience": years_exp
     }
     
-    # Returns exact salary if only one person matches
+    
     return get_user_stats(filters)
